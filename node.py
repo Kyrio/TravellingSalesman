@@ -14,11 +14,11 @@ class Node:
 
     @property
     def current_city(self):
-        if self.longueur > 0:
-            return self.liste_som[self.longueur - 1]
+        if self.length > 0:
+            return self.liste_som[self.length - 1]
 
     @property
-    def longueur(self):
+    def length(self):
         return len(self.liste_som)
 
 
@@ -44,3 +44,9 @@ class RoadMap:
     @property
     def nb_cities(self):
         return len(self.cities)
+
+    def print(self):
+        for i in range(self.nb_cities):
+            for j in range(self.nb_cities):
+                print(str(self.edges[i][j]) + "\t", end="")
+            print()
