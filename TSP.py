@@ -22,6 +22,7 @@ def h_zero():
     return 0
 
 
+# TODO Algo de Kruskal sur les villes non visitées (composante connexe ?)
 def h_kruskal(road_map, visited):
     cities = road_map.cities
 
@@ -44,17 +45,14 @@ def h_edges_min(road_map, visited):
 
 def develop_node(road_map, node):
     if len(node.next_nodes) > 0:
-        return []
+        return
 
-    nodes = []
     visited = node.liste_som
     total_cities = road_map.cities
     for i in total_cities:
         if i not in visited:
             new_node = build_node(road_map, node, i, [])
             node.next_nodes.append(new_node)
-            nodes.append(new_node)
-    return nodes
 
 
 def grp_size(nb_cities):
@@ -65,22 +63,22 @@ def grp_size(nb_cities):
     return size
 
 
-# FIXME so hard
 def a_star(road_map, start_city):
     open_heap = []
-
+    count = 0
     start_node = Node(0, h_local_min(road_map, start_city), [start_city], [])
-    heapq.heappush(open_heap, (start_node.estim_f, start_node))
+    heapq.heappush(open_heap, start_node)
 
     while len(open_heap) > 0:
-        n = heapq.heappop(open_heap)[1]
+        n = heapq.heappop(open_heap)
+
         if n.length == road_map.nb_cities + 1:
             print('Succès !')
-            return open_heap
+            return n, count
         else:
-            heirs = develop_node(road_map, n)
-            for heir in heirs:
-                print(open_heap, (heir.estim_f, heir))
-                heapq.heappush(open_heap, (heir.estim_f, heir))
+            develop_node(road_map, n)
+            for heir in n.next_nodes:
+                count += 1
+                heapq.heappush(open_heap, heir)
 
     print('Echec !')

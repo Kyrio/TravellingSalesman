@@ -8,6 +8,12 @@ class Node:
         self.liste_som = liste_som  # liste des villes
         self.next_nodes = next_nodes  # suite de la liste (successeurs du noeud)
 
+    def __lt__(self, other):
+        return self.estim_f < other.estim_f
+
+    def __gt__(self, other):
+        return self.estim_f > other.estim_f
+
     @property
     def estim_f(self):
         return self.estim_g + self.estim_h
