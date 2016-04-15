@@ -29,6 +29,8 @@ class Node:
 
 
 class RoadMap:
+    # FIXME indices ou valeurs pour décrire les villes ?
+
     def __init__(self, map_size):
         self.cities = []
         for i in range(map_size):
@@ -42,10 +44,36 @@ class RoadMap:
             edges[i][i] = float('inf')
             for j in range(self.nb_cities):
                 if i != j:
-                    edges[i][j] = random.randint(1, 100)
+                    edges[i][j] = random.randint(1, 10)
                     edges[j][i] = edges[i][j]
 
         return edges
+
+    def get_distance(self, x, y):
+        return self.edges[x][y]
+
+    def edge_list(self, visited):
+        e_list = []
+        for x in range(len(self.edges)):
+            for y in range(x + 1, len(self.edges[x])):
+                if self.edges[x][y] != float('inf') and x < len(self.cities) and y < len(self.cities):
+
+                    if x == visited[len(visited)-1] and y not in visited:
+                        e_list.append((self.edges[x][y], x, y))
+
+                    elif x == visited[0] and y not in visited:
+                        e_list.append((self.edges[x][y], x, y))
+
+                    elif y == visited[len(visited) - 1] and x not in visited:
+                        e_list.append((self.edges[x][y], x, y))
+
+                    elif y == visited[0] and x not in visited:
+                        e_list.append((self.edges[x][y], x, y))
+
+                    elif x not in visited and y not in visited:
+                        e_list.append((self.edges[x][y], x, y))
+
+        return e_list
 
     @property
     def nb_cities(self):

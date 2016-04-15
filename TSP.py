@@ -1,4 +1,5 @@
 from node import Node, RoadMap
+from unionfind import Forest
 import math
 import heapq
 
@@ -8,7 +9,7 @@ def build_start_node(road_map, start_city, heuristic_code):
         return Node(0, h_zero(), [start_city], [])
 
     elif heuristic_code == 1:
-        return Node(0, h_local_min(road_map, start_city), [start_city], [])
+        return Node(0, h_local_min(road_map, start_city, [start_city]), [start_city], [])
 
     elif heuristic_code == 2:
         return Node(0, h_edges_min(road_map, [start_city]), [start_city], [])
@@ -24,7 +25,7 @@ def build_node(road_map, old_node, new_city, next_nodes, heuristic_code):
 
     estim_h = h_zero()
     if heuristic_code == 1:
-        estim_h = h_local_min(road_map, new_city)
+        estim_h = h_local_min(road_map, new_city, liste_som)
 
     elif heuristic_code == 2:
         estim_h = h_edges_min(road_map, liste_som)
@@ -45,8 +46,16 @@ def h_zero():
     return 0
 
 
-def h_local_min(road_map, current_city):
-    distances = road_map.edges[current_city]
+# FIXME heuristique nulle plus efficace lol
+def h_local_min(road_map, current_city, visited):
+    cities = road_map.cities
+    distances = []
+    for i in cities:
+        if i not in visited:
+            distances.append(road_map.edges[current_city][i])
+    if len(distances) == 0:
+        return road_map.edges[current_city][visited[0]]
+
     return min(distances)
 
 
@@ -59,12 +68,48 @@ def h_edges_min(road_map, visited):
     return sum_distance
 
 
+# def make_set(x):
+#     x.parent = x
+#     x.rank = 0
+#
+#
+# def find(x):
+#     if x.parent != x:
+#         x.parent = find(x.parent)
+#     return x.parent
+#
+#
+# def union(x, y):
+#     root_x = find(x)
+#     root_y = find(y)
+#
+#     if root_x == root_y:
+#         return
+#
+#     if root_x.rank > root_y.rank:
+#         root_y.parent = root_x
+#     elif root_x.rank < root_y.rank:
+#         root_x.parent = root_y
+#     else:
+#         root_y.parent = root_x
+#         root_x.rank += 1
+#
+
 # TODO Algo de Kruskal sur les villes non visitées (composante connexe ?)
 def h_kruskal(road_map, visited):
+    edge_list = road_map.edge_list(visited)
     cities = road_map.cities
+    forest = Forest(cities)
 
-    n = len(cities) - len(visited)
-    return 0
+    tree_weight = 0
+
+    edge_list.sort()
+    for weight, u, v in edge_list:
+        if forest.find(u) != forest.find(v):
+            tree_weight += weight
+            forest.union(u, v)
+
+    return tree_weight
 
 
 def develop_node(road_map, node, heuristic_code):
