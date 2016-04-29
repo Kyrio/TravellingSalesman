@@ -1,0 +1,23 @@
+.. Voyageur de commerce documentation master file, created by
+   sphinx-quickstart on Fri Apr 29 19:24:40 2016.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Voyageur de commerce
+====================
+
+Cette documentation est consacrée au package **salesman**, contenant les
+classes et méthodes nécessaires à la génération de cartes routières (module **roadmap**)
+et à la résolution du problème *via* l'algorithme A* (modules **tsp**, node et forest).
+
+.. toctree::
+   :maxdepth: 4
+
+   salesman
+
+
+Index
+=====
+
+* :ref:`genindex`
+* :ref:`modindex`

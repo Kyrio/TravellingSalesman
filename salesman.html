@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>salesman package &mdash; documentation Voyageur de commerce 1.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="documentation Voyageur de commerce 1.0" href="index.html"/>
+        <link rel="prev" title="Voyageur de commerce" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Voyageur de commerce
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">salesman package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-salesman.forest">salesman.forest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-salesman.node">salesman.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-salesman.roadmap">salesman.roadmap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-salesman.tsp">salesman.tsp module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Voyageur de commerce</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>salesman package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/salesman.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="salesman-package">
+<h1>salesman package<a class="headerlink" href="#salesman-package" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="module-salesman.forest">
+<span id="salesman-forest-module"></span><h2>salesman.forest module<a class="headerlink" href="#module-salesman.forest" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="salesman.forest.Forest">
+<em class="property">class </em><code class="descclassname">salesman.forest.</code><code class="descname">Forest</code><span class="sig-paren">(</span><em>vertices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<blockquote>
+<div><dl class="method">
+<dt id="salesman.forest.Forest.__init__">
+<code class="descclassname">Forest.</code><code class="descname">__init__</code><span class="sig-paren">(</span><em>vertices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest.__init__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salesman.forest.Forest.find">
+<code class="descclassname">Forest.</code><code class="descname">find</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest.find" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salesman.forest.Forest.union">
+<code class="descclassname">Forest.</code><code class="descname">union</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest.union"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest.union" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="module-salesman.node">
+<span id="salesman-node-module"></span><h2>salesman.node module<a class="headerlink" href="#module-salesman.node" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="salesman.node.Node">
+<em class="property">class </em><code class="descclassname">salesman.node.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>estim_g</em>, <em>estim_h</em>, <em>liste_som</em>, <em>next_nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.node.Node" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<blockquote>
+<div><p>Classe représentant un nœud du graphe de résolution de problème (GRP).</p>
+<dl class="method">
+<dt id="salesman.node.Node.__gt__">
+<code class="descclassname">Node.</code><code class="descname">__gt__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/node.html#Node.__gt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.node.Node.__gt__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>other</strong> &#8211; Un autre nœud du GRP.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">Vrai si f &gt; f(other)</td>
+</tr>
+</tbody>
+</table>
+<p>Fonction utilisée pour comparer un nœud à un autre selon la valeur de f.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salesman.node.Node.__init__">
+<code class="descclassname">Node.</code><code class="descname">__init__</code><span class="sig-paren">(</span><em>estim_g</em>, <em>estim_h</em>, <em>liste_som</em>, <em>next_nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/node.html#Node.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.node.Node.__init__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>estim_g</strong> &#8211; La valeur de g (coût du chemin parcouru) estimant le coût optimal du nœud de départ à celui-ci</li>
+<li><strong>estim_h</strong> &#8211; La valeur de h (calculée selon l&#8217;heuristique) estimant le coût optimal de ce nœud à un but</li>
+<li><strong>liste_som</strong> &#8211; Liste des villes déjà parcourues</li>
+<li><strong>next_nodes</strong> &#8211; Liste des successeurs du noeud (normalement vide tant qu&#8217;on n&#8217;a pas développé le nœud)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructeur d&#8217;un nœud du GRP.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salesman.node.Node.__lt__">
+<code class="descclassname">Node.</code><code class="descname">__lt__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/node.html#Node.__lt__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.node.Node.__lt__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>other</strong> &#8211; Un autre nœud du GRP.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">Vrai si f &lt; f(other)</td>
+</tr>
+</tbody>
+</table>
+<p>Fonction utilisée pour comparer un nœud à un autre selon la valeur de f.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="salesman.node.Node.current_city">
+<code class="descclassname">Node.</code><code class="descname">current_city</code><a class="headerlink" href="#salesman.node.Node.current_city" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">La ville dans laquelle le voyageur se trouve, c&#8217;est-à-dire la dernière de liste_som.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="salesman.node.Node.estim_f">
+<code class="descclassname">Node.</code><code class="descname">estim_f</code><a class="headerlink" href="#salesman.node.Node.estim_f" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">La valeur de f (fonction d&#8217;évaluation) où f = g + h.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="salesman.node.Node.length">
+<code class="descclassname">Node.</code><code class="descname">length</code><a class="headerlink" href="#salesman.node.Node.length" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">Le nombre de villes parcourues.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="module-salesman.roadmap">
+<span id="salesman-roadmap-module"></span><h2>salesman.roadmap module<a class="headerlink" href="#module-salesman.roadmap" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="class">
+<dt id="salesman.roadmap.RoadMap">
+<em class="property">class </em><code class="descclassname">salesman.roadmap.</code><code class="descname">RoadMap</code><span class="sig-paren">(</span><em>map_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/roadmap.html#RoadMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.roadmap.RoadMap" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<blockquote>
+<div><p>Classe représentant une carte routière (liste des villes et distances entre elles).
+Dans ce modèle, pour tout couple de villes, il existe une route les reliant.</p>
+<dl class="method">
+<dt id="salesman.roadmap.RoadMap.__init__">
+<code class="descclassname">RoadMap.</code><code class="descname">__init__</code><span class="sig-paren">(</span><em>map_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/roadmap.html#RoadMap.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.roadmap.RoadMap.__init__" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>map_size</strong> &#8211; Nombre n de villes.</td>
+</tr>
+</tbody>
+</table>
+<p>Constructeur de la carte routière. Pour la taille n choisie, il génère une carte où les
+villes sont désignées par un indice de 0 à n-1, et une matrice de distances choisies aléatoirement.
+On se place dans le cas général où la cohérence géométrique n&#8217;est pas assurée.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salesman.roadmap.RoadMap.edge_list">
+<code class="descclassname">RoadMap.</code><code class="descname">edge_list</code><span class="sig-paren">(</span><em>visited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/roadmap.html#RoadMap.edge_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.roadmap.RoadMap.edge_list" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>visited</strong> &#8211; Liste des villes déjà visitées.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">Liste des arêtes sous la forme (distance, ville_source, ville_destination)</td>
+</tr>
+</tbody>
+</table>
+<p>Fonction permettant d&#8217;obtenir les arêtes reliant entre elles les villes restant à visiter.
+Utilisée dans l&#8217;heuristique de Kruskal afin d&#8217;obtenir un arbre couvrant de poids minimum
+sur la carte privée des villes visitées.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salesman.roadmap.RoadMap.make_edges">
+<code class="descclassname">RoadMap.</code><code class="descname">make_edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/roadmap.html#RoadMap.make_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.roadmap.RoadMap.make_edges" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">Matrice des distances (tableau à deux dimensions).</td>
+</tr>
+</tbody>
+</table>
+<p>Fonction chargée de créer la matrice des distances entre les villes.
+M(i, j), i et j allant de 0 à n - 1, représente la distance entre la ville 0 et la ville 1.
+La matrice est symétrique et pour tout i, M(i, i) = +inf.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="salesman.roadmap.RoadMap.nb_cities">
+<code class="descclassname">RoadMap.</code><code class="descname">nb_cities</code><a class="headerlink" href="#salesman.roadmap.RoadMap.nb_cities" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">Nombre de villes dans la carte.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="salesman.roadmap.RoadMap.print">
+<code class="descclassname">RoadMap.</code><code class="descname">print</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/roadmap.html#RoadMap.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.roadmap.RoadMap.print" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">Affichage de la matrice des distances sous une forme lisible.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="module-salesman.tsp">
+<span id="salesman-tsp-module"></span><h2>salesman.tsp module<a class="headerlink" href="#module-salesman.tsp" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="function">
+<dt id="salesman.tsp.a_star">
+<code class="descclassname">salesman.tsp.</code><code class="descname">a_star</code><span class="sig-paren">(</span><em>road_map</em>, <em>start_city</em>, <em>heuristic_code</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#a_star"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.a_star" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>road_map</strong> &#8211; Carte routière à utiliser.</li>
+<li><strong>start_city</strong> &#8211; Ville de départ du voyageur.</li>
+<li><strong>heuristic_code</strong> &#8211; Code désignant l&#8217;heuristique à calculer pour tous les nœuds du GRP.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body"><p class="first last">Duplet contenant le nœud but (chemin optimal) en cas de succès, ainsi que le nombre de nœuds développés.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Algorithme A*. Cette fonction est indépendante et appelle toutes les méthodes nécessaires au calcul
+du chemin optimal pour le voyageur de commerce sur une carte routière donnée.
+Elle retourne le dernier nœud retiré de la file OUVERT et le nombre de nœuds développés, et affiche &#8220;Succès !&#8221;
+si c&#8217;est un nœud but, ou &#8220;Échec !&#8221; si OUVERT est vide (échec de l&#8217;algorithme).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.build_node">
+<code class="descclassname">salesman.tsp.</code><code class="descname">build_node</code><span class="sig-paren">(</span><em>road_map</em>, <em>old_node</em>, <em>new_city</em>, <em>heuristic_code</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#build_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.build_node" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>road_map</strong> &#8211; Carte routière correspondante.</li>
+<li><strong>old_node</strong> &#8211; Prédécesseur du nœud à construire dans le GRP.</li>
+<li><strong>new_city</strong> &#8211; Ville à ajouter à la liste de villes visitées.</li>
+<li><strong>heuristic_code</strong> &#8211; Code désignant l&#8217;heuristique à calculer pour ce nœud.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body"><p class="first last">Le nœud en question (objet Node).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Construit un nœud du GRP à partir de son prédécesseur. Voir build_start_node pour le nœud de départ.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.build_start_node">
+<code class="descclassname">salesman.tsp.</code><code class="descname">build_start_node</code><span class="sig-paren">(</span><em>road_map</em>, <em>start_city</em>, <em>heuristic_code</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#build_start_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.build_start_node" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>road_map</strong> &#8211; Carte routière correspondante.</li>
+<li><strong>start_city</strong> &#8211; Ville de départ du voyageur.</li>
+<li><strong>heuristic_code</strong> &#8211; Code désignant l&#8217;heuristique à calculer pour ce nœud.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body"><p class="first last">Le nœud de départ (objet Node).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Construit le premier noeud du graphe de résolution de problème (GRP).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.develop_node">
+<code class="descclassname">salesman.tsp.</code><code class="descname">develop_node</code><span class="sig-paren">(</span><em>road_map</em>, <em>node</em>, <em>heuristic_code</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#develop_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.develop_node" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>road_map</strong> &#8211; Carte routière correspondante.</li>
+<li><strong>node</strong> &#8211; Nœud à développer.</li>
+<li><strong>heuristic_code</strong> &#8211; Code désignant l&#8217;heuristique à calculer pour ce nœud.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Développe un nœud en construisant ses successeurs et en les ajoutant à sa liste de successeurs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.grp_size">
+<code class="descclassname">salesman.tsp.</code><code class="descname">grp_size</code><span class="sig-paren">(</span><em>nb_cities</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#grp_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.grp_size" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>nb_cities</strong> &#8211; Nombre de villes dans l&#8217;exemple voulu.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">Taille du GRP dans cet exemple.</td>
+</tr>
+</tbody>
+</table>
+<p>Calcule la taille du GRP en fonction du nombre de villes à visiter.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.h_edges_min">
+<code class="descclassname">salesman.tsp.</code><code class="descname">h_edges_min</code><span class="sig-paren">(</span><em>road_map</em>, <em>visited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#h_edges_min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.h_edges_min" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>road_map</strong> &#8211; Carte routière correspondante.</li>
+<li><strong>visited</strong> &#8211; Liste des villes visitées.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body"><p class="first last">Valeur de cette heuristique dans le cas courant.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cette heuristique s&#8217;obtient en faisant la somme du coût minimum issu de chaque ville non visitée.
+Un coût minimum issu d&#8217;une ville est la plus petite distance la séparant d&#8217;une autre ville de la carte.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.h_kruskal">
+<code class="descclassname">salesman.tsp.</code><code class="descname">h_kruskal</code><span class="sig-paren">(</span><em>road_map</em>, <em>visited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#h_kruskal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.h_kruskal" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>road_map</strong> &#8211; Carte routière correspondante.</li>
+<li><strong>visited</strong> &#8211; Liste des villes visitées.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body"><p class="first last">Valeur de l&#8217;heuristique : poids de l&#8217;arbre de poids minimum.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Heuristique de l&#8217;arbre de poids minimum. En utilisant l&#8217;algorithme de Kruskal (à l&#8217;aide d&#8217;ensembles disjoints),
+on obtient l&#8217;arbre de poids minium couvrant le graphe partiel où les arêtes inutiles (reliant des villes visitées
+auparavant) ont été retirées.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.h_local_min">
+<code class="descclassname">salesman.tsp.</code><code class="descname">h_local_min</code><span class="sig-paren">(</span><em>road_map</em>, <em>current_city</em>, <em>visited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#h_local_min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.h_local_min" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
+<li><strong>road_map</strong> &#8211; Carte routière correspondante.</li>
+<li><strong>current_city</strong> &#8211; Dernière ville visitée (ville courante).</li>
+<li><strong>visited</strong> &#8211; Liste des villes visitées.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body"><p class="first last">Valeur de l&#8217;heuristique du minimum local dans le cas courant.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Heuristique du minimum local : distance de la ville courante à la ville (non visitée) la plus proche.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="salesman.tsp.h_zero">
+<code class="descclassname">salesman.tsp.</code><code class="descname">h_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/tsp.html#h_zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.tsp.h_zero" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">Zéro (heuristique nulle)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Voyageur de commerce" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olivier Da Rocha, Timothee Pallot.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

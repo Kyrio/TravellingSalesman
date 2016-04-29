@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>salesman.tsp &mdash; documentation Voyageur de commerce 1.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="documentation Voyageur de commerce 1.0" href="../../index.html"/>
+        <link rel="up" title="Code du module" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Voyageur de commerce
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../salesman.html">salesman package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Voyageur de commerce</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Code du module</a> &raquo;</li>
+      
+    <li>salesman.tsp</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Code source de salesman.tsp</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">heapq</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">salesman.forest</span> <span class="kn">import</span> <span class="n">Forest</span>
+<span class="kn">from</span> <span class="nn">salesman.node</span> <span class="kn">import</span> <span class="n">Node</span>
+
+
+<div class="viewcode-block" id="a_star"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.a_star">[docs]</a><span class="k">def</span> <span class="nf">a_star</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">start_city</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière à utiliser.</span>
+<span class="sd">    :param start_city: Ville de départ du voyageur.</span>
+<span class="sd">    :param heuristic_code: Code désignant l&#39;heuristique à calculer pour tous les nœuds du GRP.</span>
+<span class="sd">    :return: Duplet contenant le nœud but (chemin optimal) en cas de succès, ainsi que le nombre de nœuds développés.</span>
+
+<span class="sd">    Algorithme A*. Cette fonction est indépendante et appelle toutes les méthodes nécessaires au calcul</span>
+<span class="sd">    du chemin optimal pour le voyageur de commerce sur une carte routière donnée.</span>
+<span class="sd">    Elle retourne le dernier nœud retiré de la file OUVERT et le nombre de nœuds développés, et affiche &quot;Succès !&quot;</span>
+<span class="sd">    si c&#39;est un nœud but, ou &quot;Échec !&quot; si OUVERT est vide (échec de l&#39;algorithme).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">open_heap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">start_node</span> <span class="o">=</span> <span class="n">build_start_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">start_city</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">)</span>
+    <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">open_heap</span><span class="p">,</span> <span class="n">start_node</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">open_heap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">open_heap</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="n">road_map</span><span class="o">.</span><span class="n">nb_cities</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Succès !&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">count</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">develop_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">heir</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">next_nodes</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">open_heap</span><span class="p">,</span> <span class="n">heir</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Échec !&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">count</span></div>
+
+
+<div class="viewcode-block" id="build_start_node"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.build_start_node">[docs]</a><span class="k">def</span> <span class="nf">build_start_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">start_city</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière correspondante.</span>
+<span class="sd">    :param start_city: Ville de départ du voyageur.</span>
+<span class="sd">    :param heuristic_code: Code désignant l&#39;heuristique à calculer pour ce nœud.</span>
+<span class="sd">    :return: Le nœud de départ (objet Node).</span>
+
+<span class="sd">    Construit le premier noeud du graphe de résolution de problème (GRP).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h_zero</span><span class="p">(),</span> <span class="p">[</span><span class="n">start_city</span><span class="p">],</span> <span class="p">[])</span>
+
+    <span class="k">elif</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h_local_min</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">start_city</span><span class="p">,</span> <span class="p">[</span><span class="n">start_city</span><span class="p">]),</span> <span class="p">[</span><span class="n">start_city</span><span class="p">],</span> <span class="p">[])</span>
+
+    <span class="k">elif</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h_edges_min</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="p">[</span><span class="n">start_city</span><span class="p">]),</span> <span class="p">[</span><span class="n">start_city</span><span class="p">],</span> <span class="p">[])</span>
+
+    <span class="k">elif</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h_kruskal</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="p">[</span><span class="n">start_city</span><span class="p">]),</span> <span class="p">[</span><span class="n">start_city</span><span class="p">],</span> <span class="p">[])</span></div>
+
+
+<div class="viewcode-block" id="build_node"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.build_node">[docs]</a><span class="k">def</span> <span class="nf">build_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">old_node</span><span class="p">,</span> <span class="n">new_city</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière correspondante.</span>
+<span class="sd">    :param old_node: Prédécesseur du nœud à construire dans le GRP.</span>
+<span class="sd">    :param new_city: Ville à ajouter à la liste de villes visitées.</span>
+<span class="sd">    :param heuristic_code: Code désignant l&#39;heuristique à calculer pour ce nœud.</span>
+<span class="sd">    :return: Le nœud en question (objet Node).</span>
+
+<span class="sd">    Construit un nœud du GRP à partir de son prédécesseur. Voir build_start_node pour le nœud de départ.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">movement_cost</span> <span class="o">=</span> <span class="n">road_map</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">old_node</span><span class="o">.</span><span class="n">current_city</span><span class="p">][</span><span class="n">new_city</span><span class="p">]</span>
+    <span class="n">liste_som</span> <span class="o">=</span> <span class="n">old_node</span><span class="o">.</span><span class="n">liste_som</span> <span class="o">+</span> <span class="p">[</span><span class="n">new_city</span><span class="p">]</span>
+    <span class="n">estim_g</span> <span class="o">=</span> <span class="n">old_node</span><span class="o">.</span><span class="n">estim_g</span> <span class="o">+</span> <span class="n">movement_cost</span>
+
+    <span class="n">estim_h</span> <span class="o">=</span> <span class="n">h_zero</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">estim_h</span> <span class="o">=</span> <span class="n">h_local_min</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">new_city</span><span class="p">,</span> <span class="n">liste_som</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">estim_h</span> <span class="o">=</span> <span class="n">h_edges_min</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">liste_som</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">heuristic_code</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">estim_h</span> <span class="o">=</span> <span class="n">h_kruskal</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">liste_som</span><span class="p">)</span>
+
+    <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">estim_g</span><span class="p">,</span> <span class="n">estim_h</span><span class="p">,</span> <span class="n">liste_som</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="c1"># Traite le cas de la fin du GRP : lorsque toutes les villes ont été visitées,</span>
+    <span class="c1"># on crée le dernier nœud qui prend en compte le coût de retour à la ville de départ.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste_som</span><span class="p">)</span> <span class="o">==</span> <span class="n">road_map</span><span class="o">.</span><span class="n">nb_cities</span><span class="p">:</span>
+        <span class="n">leaf</span> <span class="o">=</span> <span class="n">build_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">liste_som</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">heuristic_code</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">node</span></div>
+
+
+<div class="viewcode-block" id="develop_node"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.develop_node">[docs]</a><span class="k">def</span> <span class="nf">develop_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière correspondante.</span>
+<span class="sd">    :param node: Nœud à développer.</span>
+<span class="sd">    :param heuristic_code: Code désignant l&#39;heuristique à calculer pour ce nœud.</span>
+
+<span class="sd">    Développe un nœud en construisant ses successeurs et en les ajoutant à sa liste de successeurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next_nodes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">visited</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">liste_som</span>
+    <span class="n">total_cities</span> <span class="o">=</span> <span class="n">road_map</span><span class="o">.</span><span class="n">cities</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">total_cities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="n">new_node</span> <span class="o">=</span> <span class="n">build_node</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">heuristic_code</span><span class="p">)</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">next_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="h_zero"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.h_zero">[docs]</a><span class="k">def</span> <span class="nf">h_zero</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :return: Zéro (heuristique nulle)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="h_local_min"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.h_local_min">[docs]</a><span class="k">def</span> <span class="nf">h_local_min</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">current_city</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière correspondante.</span>
+<span class="sd">    :param current_city: Dernière ville visitée (ville courante).</span>
+<span class="sd">    :param visited: Liste des villes visitées.</span>
+<span class="sd">    :return: Valeur de l&#39;heuristique du minimum local dans le cas courant.</span>
+
+<span class="sd">    Heuristique du minimum local : distance de la ville courante à la ville (non visitée) la plus proche.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cities</span> <span class="o">=</span> <span class="n">road_map</span><span class="o">.</span><span class="n">cities</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">road_map</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">current_city</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="h_edges_min"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.h_edges_min">[docs]</a><span class="k">def</span> <span class="nf">h_edges_min</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière correspondante.</span>
+<span class="sd">    :param visited: Liste des villes visitées.</span>
+<span class="sd">    :return: Valeur de cette heuristique dans le cas courant.</span>
+
+<span class="sd">    Cette heuristique s&#39;obtient en faisant la somme du coût minimum issu de chaque ville non visitée.</span>
+<span class="sd">    Un coût minimum issu d&#39;une ville est la plus petite distance la séparant d&#39;une autre ville de la carte.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sum_distance</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cities</span> <span class="o">=</span> <span class="n">road_map</span><span class="o">.</span><span class="n">cities</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="n">sum_distance</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span><span class="n">road_map</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">sum_distance</span></div>
+
+
+<div class="viewcode-block" id="h_kruskal"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.h_kruskal">[docs]</a><span class="k">def</span> <span class="nf">h_kruskal</span><span class="p">(</span><span class="n">road_map</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param road_map: Carte routière correspondante.</span>
+<span class="sd">    :param visited: Liste des villes visitées.</span>
+<span class="sd">    :return: Valeur de l&#39;heuristique : poids de l&#39;arbre de poids minimum.</span>
+
+<span class="sd">    Heuristique de l&#39;arbre de poids minimum. En utilisant l&#39;algorithme de Kruskal (à l&#39;aide d&#39;ensembles disjoints),</span>
+<span class="sd">    on obtient l&#39;arbre de poids minium couvrant le graphe partiel où les arêtes inutiles (reliant des villes visitées</span>
+<span class="sd">    auparavant) ont été retirées.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">edge_list</span> <span class="o">=</span> <span class="n">road_map</span><span class="o">.</span><span class="n">edge_list</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span>
+    <span class="n">cities</span> <span class="o">=</span> <span class="n">road_map</span><span class="o">.</span><span class="n">cities</span>
+    <span class="n">forest</span> <span class="o">=</span> <span class="n">Forest</span><span class="p">(</span><span class="n">cities</span><span class="p">)</span>
+
+    <span class="n">tree_weight</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">edge_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">weight</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edge_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">forest</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">!=</span> <span class="n">forest</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="n">tree_weight</span> <span class="o">+=</span> <span class="n">weight</span>
+            <span class="n">forest</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tree_weight</span></div>
+
+
+<div class="viewcode-block" id="grp_size"><a class="viewcode-back" href="../../salesman.html#salesman.tsp.grp_size">[docs]</a><span class="k">def</span> <span class="nf">grp_size</span><span class="p">(</span><span class="n">nb_cities</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param nb_cities: Nombre de villes dans l&#39;exemple voulu.</span>
+<span class="sd">    :return: Taille du GRP dans cet exemple.</span>
+
+<span class="sd">    Calcule la taille du GRP en fonction du nombre de villes à visiter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_cities</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">size</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">nb_cities</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">nb_cities</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">nb_cities</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">size</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olivier Da Rocha, Timothee Pallot.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
