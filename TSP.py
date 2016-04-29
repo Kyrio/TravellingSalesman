@@ -1,7 +1,42 @@
 import heapq
 import math
 from node import Node
-from unionfind import Forest
+from forest import Forest
+
+
+def a_star(road_map, start_city, heuristic_code):
+    """
+    :param road_map: Carte routière à utiliser.
+    :param start_city: Ville de départ du voyageur.
+    :param heuristic_code: Code désignant l'heuristique à calculer pour tous les nœuds du GRP.
+    :return: Duplet contenant le nœud but (chemin optimal) en cas de succès, ainsi que le nombre de nœuds développés.
+
+    Algorithme A*. Cette fonction est indépendante et appelle toutes les méthodes nécessaires au calcul
+    du chemin optimal pour le voyageur de commerce sur une carte routière donnée.
+    Elle retourne le dernier nœud retiré de la file OUVERT et le nombre de nœuds développés, et affiche "Succès !"
+    si c'est un nœud but, ou "Échec !" si OUVERT est vide (échec de l'algorithme).
+    """
+
+    open_heap = []
+    count = 0
+    start_node = build_start_node(road_map, start_city, heuristic_code)
+    heapq.heappush(open_heap, start_node)
+    n = None
+
+    while len(open_heap) > 0:
+        n = heapq.heappop(open_heap)
+
+        if n.length == road_map.nb_cities + 1:
+            print('Succès !')
+            return n, count
+        else:
+            develop_node(road_map, n, heuristic_code)
+            for heir in n.next_nodes:
+                count += 1
+                heapq.heappush(open_heap, heir)
+
+    print('Échec !')
+    return n, count
 
 
 def build_start_node(road_map, start_city, heuristic_code):
@@ -61,6 +96,26 @@ def build_node(road_map, old_node, new_city, heuristic_code):
         node.next_nodes.append(leaf)
 
     return node
+
+
+def develop_node(road_map, node, heuristic_code):
+    """
+    :param road_map: Carte routière correspondante.
+    :param node: Nœud à développer.
+    :param heuristic_code: Code désignant l'heuristique à calculer pour ce nœud.
+
+    Développe un nœud en construisant ses successeurs et en les ajoutant à sa liste de successeurs.
+    """
+
+    if len(node.next_nodes) > 0:
+        return
+
+    visited = node.liste_som
+    total_cities = road_map.cities
+    for i in total_cities:
+        if i not in visited:
+            new_node = build_node(road_map, node, i, heuristic_code)
+            node.next_nodes.append(new_node)
 
 
 def h_zero():
@@ -133,26 +188,6 @@ def h_kruskal(road_map, visited):
     return tree_weight
 
 
-def develop_node(road_map, node, heuristic_code):
-    """
-    :param road_map: Carte routière correspondante.
-    :param node: Nœud à développer.
-    :param heuristic_code: Code désignant l'heuristique à calculer pour ce nœud.
-
-    Développe un nœud en construisant ses successeurs et en les ajoutant à sa liste de successeurs.
-    """
-
-    if len(node.next_nodes) > 0:
-        return
-
-    visited = node.liste_som
-    total_cities = road_map.cities
-    for i in total_cities:
-        if i not in visited:
-            new_node = build_node(road_map, node, i, heuristic_code)
-            node.next_nodes.append(new_node)
-
-
 def grp_size(nb_cities):
     """
     :param nb_cities: Nombre de villes dans l'exemple voulu.
@@ -166,38 +201,3 @@ def grp_size(nb_cities):
         size += math.factorial(nb_cities - 1) / math.factorial(nb_cities - i)
     size += math.factorial(nb_cities - 1)
     return size
-
-
-def a_star(road_map, start_city, heuristic_code):
-    """
-    :param road_map: Carte routière à utiliser.
-    :param start_city: Ville de départ du voyageur.
-    :param heuristic_code: Code désignant l'heuristique à calculer pour tous les nœuds du GRP.
-    :return: Duplet contenant le nœud but (chemin optimal) en cas de succès, ainsi que le nombre de nœuds développés.
-
-    Algorithme A*. Cette fonction est indépendante et appelle toutes les méthodes nécessaires au calcul
-    du chemin optimal pour le voyageur de commerce sur une carte routière donnée.
-    Elle retourne le dernier nœud retiré de la file OUVERT et le nombre de nœuds développés, et affiche "Succès !"
-    si c'est un nœud but, ou "Échec !" si OUVERT est vide (échec de l'algorithme).
-    """
-
-    open_heap = []
-    count = 0
-    start_node = build_start_node(road_map, start_city, heuristic_code)
-    heapq.heappush(open_heap, start_node)
-    n = None
-
-    while len(open_heap) > 0:
-        n = heapq.heappop(open_heap)
-
-        if n.length == road_map.nb_cities + 1:
-            print('Succès !')
-            return n, count
-        else:
-            develop_node(road_map, n, heuristic_code)
-            for heir in n.next_nodes:
-                count += 1
-                heapq.heappush(open_heap, heir)
-
-    print('Échec !')
-    return n, count
