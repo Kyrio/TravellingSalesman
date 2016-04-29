@@ -1,5 +1,5 @@
 class Forest:
-    # FIXME probleme d'indices (refaire une classe pour chaque union ?)
+
     def __init__(self, vertices):
         self.parents = vertices.copy()
         self.ranks = [0 for i in range(len(vertices))]
