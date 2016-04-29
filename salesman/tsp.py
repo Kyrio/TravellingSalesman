@@ -1,7 +1,7 @@
 import heapq
 import math
-from node import Node
-from forest import Forest
+from salesman.forest import Forest
+from salesman.node import Node
 
 
 def a_star(road_map, start_city, heuristic_code):
