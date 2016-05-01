@@ -143,20 +143,61 @@
 
 <p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <blockquote>
-<div><dl class="method">
+<div><p>Classe utilisée dans la méthode des ensembles disjoints (union-find) pour l&#8217;algorithme de Kruskal.
+Elle est construite à partir d&#8217;une liste de sommets, et représente ces sommets sous forme d&#8217;arbres.
+Elle possède des méthodes pour trouver la racine d&#8217;un arbre (find) ou attacher deux arbres par la racine (union).</p>
+<dl class="method">
 <dt id="salesman.forest.Forest.__init__">
 <code class="descclassname">Forest.</code><code class="descname">__init__</code><span class="sig-paren">(</span><em>vertices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest.__init__" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>vertices</strong> &#8211; Liste de sommets (villes dans notre exemple) représentés par un indice.</td>
+</tr>
+</tbody>
+</table>
+<p>Constructeur de la forêt : à chaque sommet est associé un parent (lui-même à l&#8217;initialisation)
+et un rang (0 à l&#8217;initialisation car chaque arbre ne possède qu&#8217;un sommet).</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="salesman.forest.Forest.find">
 <code class="descclassname">Forest.</code><code class="descname">find</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest.find" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>x</strong> &#8211; Un sommet de la forêt (représenté par son indice).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">Racine de l&#8217;arbre sur lequel se trouve le sommet.</td>
+</tr>
+</tbody>
+</table>
+<p>Cette méthode remonte les parents du sommet reçu en paramètre pour trouver la racine de l&#8217;arbre
+sur lequel il se trouve. Elle permet notamment de vérifier que deux sommets se trouvent sur le
+même arbre.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="salesman.forest.Forest.union">
 <code class="descclassname">Forest.</code><code class="descname">union</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salesman/forest.html#Forest.union"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salesman.forest.Forest.union" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; Un sommet de la forêt (représenté par son indice).</li>
+<li><strong>y</strong> &#8211; Un second sommet de la forêt (représenté par son indice).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cette méthode recherche, pour chacun des sommets reçus, la racine de l&#8217;arbre correspondant.
+Si ces racines sont identiques, alors les sommets sont sur le même arbre et aucun changement n&#8217;est nécessaire.
+Si elles sont différentes, alors la racine du plus petit arbre est attachée à celle de l&#8217;arbre le plus grand.</p>
+</dd></dl>
 
 </div></blockquote>
 </div>

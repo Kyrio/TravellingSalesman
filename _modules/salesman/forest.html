@@ -128,17 +128,47 @@
             
   <h1>Code source de salesman.forest</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="Forest"><a class="viewcode-back" href="../../salesman.html#salesman.forest.Forest">[docs]</a><span></span><span class="k">class</span> <span class="nc">Forest</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe utilisée dans la méthode des ensembles disjoints (union-find) pour l&#39;algorithme de Kruskal.</span>
+<span class="sd">    Elle est construite à partir d&#39;une liste de sommets, et représente ces sommets sous forme d&#39;arbres.</span>
+<span class="sd">    Elle possède des méthodes pour trouver la racine d&#39;un arbre (find) ou attacher deux arbres par la racine (union).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Forest.__init__"><a class="viewcode-back" href="../../salesman.html#salesman.forest.Forest.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param vertices: Liste de sommets (villes dans notre exemple) représentés par un indice.</span>
+
+<span class="sd">        Constructeur de la forêt : à chaque sommet est associé un parent (lui-même à l&#39;initialisation)</span>
+<span class="sd">        et un rang (0 à l&#39;initialisation car chaque arbre ne possède qu&#39;un sommet).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">parents</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">))]</span></div>
 
 <div class="viewcode-block" id="Forest.find"><a class="viewcode-back" href="../../salesman.html#salesman.forest.Forest.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param x: Un sommet de la forêt (représenté par son indice).</span>
+<span class="sd">        :return: Racine de l&#39;arbre sur lequel se trouve le sommet.</span>
+
+<span class="sd">        Cette méthode remonte les parents du sommet reçu en paramètre pour trouver la racine de l&#39;arbre</span>
+<span class="sd">        sur lequel il se trouve. Elle permet notamment de vérifier que deux sommets se trouvent sur le</span>
+<span class="sd">        même arbre.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="n">x</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Forest.union"><a class="viewcode-back" href="../../salesman.html#salesman.forest.Forest.union">[docs]</a>    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param x: Un sommet de la forêt (représenté par son indice).</span>
+<span class="sd">        :param y: Un second sommet de la forêt (représenté par son indice).</span>
+
+<span class="sd">        Cette méthode recherche, pour chacun des sommets reçus, la racine de l&#39;arbre correspondant.</span>
+<span class="sd">        Si ces racines sont identiques, alors les sommets sont sur le même arbre et aucun changement n&#39;est nécessaire.</span>
+<span class="sd">        Si elles sont différentes, alors la racine du plus petit arbre est attachée à celle de l&#39;arbre le plus grand.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">root_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">root_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
