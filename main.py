@@ -1,9 +1,9 @@
 from salesman.roadmap import RoadMap
-from salesman.tsp import a_star
+from salesman.tsp import a_star, grp_size
 
 
 def calc(roadmap):
-    print("\nQuelle heuristique faut-il utiliser ?",
+    print("Quelle heuristique faut-il utiliser ?",
           "0 : heuristique nulle",
           "1 : minimum local",
           "2 : somme des coûts minimums",
@@ -15,8 +15,9 @@ def calc(roadmap):
     print("Exécution de l'algorithme A*... ", end="")
     goal, count = a_star(roadmap, start, code)
 
-    print("\nNombre de nœuds développés : {}\n"
-          "Chemin obtenu à l'issue de l'algorithme : {}".format(count, goal.liste_som), end="\n\n")
+    print("\nNombre de nœuds développés : {}".format(count),
+          "Chemin obtenu à l'issue de l'algorithme : {}".format(goal.liste_som),
+          "Longueur totale du circuit : {}".format(goal.estim_g), sep="\n", end="\n\n")
 
 
 n = int(input("Combien de villes doit contenir la carte ? "))
@@ -25,6 +26,9 @@ print("Création d'une carte routière de {} villes...".format(n), end="\n\n")
 road_map = RoadMap(n)
 print("Les villes sont numérotées de 0 à {}. Affichage de la matrice des distances :".format(n - 1))
 road_map.print()
+
+size = int(grp_size(n))
+print("\nDans cette situation, la taille totale du GRP est de {} nœuds.".format(size), end="\n\n")
 
 restart = "o"
 while restart == "o":
