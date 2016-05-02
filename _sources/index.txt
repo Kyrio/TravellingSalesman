@@ -10,6 +10,9 @@ Cette documentation est consacrée au package **salesman**, contenant les
 classes et méthodes nécessaires à la génération de cartes routières (module **roadmap**)
 et à la résolution du problème *via* l'algorithme A* (modules **tsp**, node et forest).
 
+Il est possible d'exécuter l'algorithme et de comparer les résultats selon l'heuristique
+choisie à l'aide du script **main.py**, exécutable *via* la commande Python 3.
+
 .. toctree::
    :maxdepth: 4
 
